@@ -6,5 +6,5 @@ var dt = require('./myfirstmodule');
 http.createServer(
     function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'});
-    res.end('Hello World! 2');
+    res.end("The date and time are currently: "+ dt.myDateTime());
 }).listen(8080);
