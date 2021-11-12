@@ -6,22 +6,12 @@ http.createServer(function (req, res) {
     var form = new formidable.IncomingForm();
     console.log(form);
     form.parse(req, function (err, fields, files) {
-      //Get Mime Type File (Windows Only)
-        var getMimeType = files.filetoupload.mimetype;
-      // Filter Extension File Types (Windows Only)
-      var getFileExtensions = getMimeType.substring(6);
-      //For Windows 
-      // var oldpath = files.filetoupload.filepath + '.' + getFileExtensions;
-
-      // For Linux
       var oldpath = files.filetoupload.filepath;
     console.log('oldpath ' + oldpath);
-
-    //For Windows Only
-      var newpath = 'D:/fileupload/' + files.filetoupload.originalFilename;
-
-        //For Linux
-        var newpath = '/home/linuxlite-lamminhthien/fileupload/' + files.filetoupload.originalFilename;
+      //For Linux
+        var newpath = '~/fileupload/' + files.filetoupload.originalFilename;
+      //For Windows
+      var newpath2 = "C:\\fileupload\\" + files.filetoupload.originalFilename;
       fs.rename(oldpath, newpath, function (err) {
         if (err) throw err;
         res.write('File uploaded!');
