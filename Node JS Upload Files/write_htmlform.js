@@ -6,7 +6,11 @@ http.createServer(function (req, res) {
     var form = new formidable.IncomingForm();
     console.log(form);
     form.parse(req, function (err, fields, files) {
-      var oldpath = files.filetoupload.filepath;
+      //Get Mime Type File
+        var getMimeType = files.filetoupload.mimetype;
+      // Filter Extension File Types
+      var getFileExtensions = getMimeType.substring(6);
+      var oldpath = files.filetoupload.filepath + '.' + getFileExtensions;
     console.log('oldpath ' + oldpath);
       var newpath = '~/fileupload' + files.filetoupload.name;
       fs.rename(oldpath, newpath, function (err) {
@@ -24,3 +28,4 @@ http.createServer(function (req, res) {
     return res.end();
   }
 }).listen(8080);
+
