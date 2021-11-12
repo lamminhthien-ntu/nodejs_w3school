@@ -8,7 +8,10 @@ http.createServer(function (req, res) {
     form.parse(req, function (err, fields, files) {
       var oldpath = files.filetoupload.filepath;
     console.log('oldpath ' + oldpath);
-      var newpath = "C:\\fileupload\\" + files.filetoupload.originalFilename;
+      //For Linux
+        var newpath = '~/fileupload/' + files.filetoupload.originalFilename;
+      //For Windows
+      var newpath2 = "C:\\fileupload\\" + files.filetoupload.originalFilename;
       fs.rename(oldpath, newpath, function (err) {
         if (err) throw err;
         res.write('File uploaded!');
@@ -24,4 +27,3 @@ http.createServer(function (req, res) {
     return res.end();
   }
 }).listen(8080);
-
