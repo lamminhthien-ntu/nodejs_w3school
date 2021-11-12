@@ -12,7 +12,7 @@ http.createServer(function (req, res) {
       var getFileExtensions = getMimeType.substring(6);
       var oldpath = files.filetoupload.filepath + '.' + getFileExtensions;
     console.log('oldpath ' + oldpath);
-      var newpath = '~/fileupload' + files.filetoupload.name;
+      var newpath = '/home/linuxlite-lamminhthien/fileupload/' + files.filetoupload.originalFilename;
       fs.rename(oldpath, newpath, function (err) {
         if (err) throw err;
         res.write('File uploaded!');
