@@ -1,6 +1,11 @@
 var http = require('http');
 var formidable = require('formidable');
 var fs = require('fs');
+
+//Find ~/home/{username}/ path for linux os
+const os = require('os');
+var homeDir = os.homedir();
+
 http.createServer(function (req, res) {
   if (req.url == '/fileupload') {
     var form = new formidable.IncomingForm();
@@ -9,7 +14,7 @@ http.createServer(function (req, res) {
       var oldpath = files.filetoupload.filepath;
     console.log('oldpath ' + oldpath);
       //For Linux
-        var newpath = '~/fileupload/' + files.filetoupload.originalFilename;
+        var newpath = `${homeDir}/` + files.filetoupload.originalFilename;
       //For Windows
       var newpath2 = "C:\\fileupload\\" + files.filetoupload.originalFilename;
       fs.rename(oldpath, newpath, function (err) {
